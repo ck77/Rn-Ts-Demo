@@ -1,24 +1,51 @@
-// /**
-//  * @format
-//  */
+import { Navigation } from 'react-native-navigation';
+import screen from './src/screens/constant';
+import { registerScreens } from './src/screens/index';
 
-// import {AppRegistry} from 'react-native';
-// import App from './App';
-// import {name as appName} from './app.json';
+registerScreens();
 
-// AppRegistry.registerComponent(appName, () => App);
+Navigation.setDefaultOptions({
+    statusBar: {
+        backgroundColor: '#4d089a'
+    },
+    topBar: {
+        title: {
+            color: 'white'
+        },
+        backButton: {
+            color: 'white'
+        },
+        background: {
+            color: '#4d089a'
+        }
+    }
+})
 
-import { Navigation } from "react-native-navigation";
-import App from "./App";
-Navigation.registerComponent('com.myApp.WelcomeScreen', () => App);
-Navigation.events().registerAppLaunchedListener(() => {
+Navigation.events().registerAppLaunchedListener(async () => {
     Navigation.setRoot({
         root: {
-            stack: {
+            bottomTabs: {
                 children: [
                     {
-                        component: {
-                            name: 'com.myApp.WelcomeScreen'
+                        stack: {
+                            children: [
+                                {
+                                    component: {
+                                        name: screen.home
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        stack: {
+                            children: [
+                                {
+                                    component: {
+                                        name: screen.auth
+                                    }
+                                }
+                            ]
                         }
                     }
                 ]
