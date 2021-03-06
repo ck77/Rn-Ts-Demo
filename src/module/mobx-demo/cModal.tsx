@@ -45,7 +45,6 @@ class CModal extends React.Component<IProps, IState> {
 
         const { store } = this.props;
 
-        console.log(store)
         return (
             <Modal
                 animationType='slide'
@@ -77,49 +76,6 @@ class CModal extends React.Component<IProps, IState> {
 }
 
 export default CModal;
-
-// const FModal = ({ store }: IProps) => {
-//     const [deliveryDate, setDeliveryDate] = useState(store.deliveryDate);
-//     const [giftMessage, setGiftMessage] = useState(store.giftMessage);
-
-//     const handleClose = () => {
-//         store.setShowModal(false);
-//         store.UpdateDeliveryInfo(deliveryDate, giftMessage);
-//     }
-
-//     return (
-//         <Modal
-//             animationType='slide'
-//             transparent={false}
-//             visible={store.showModal}
-//             onRequestClose={() => console.log('qqqqqqqqqqqqqqq')}
-//         >
-//             <View style={Base.container}>
-//                 <View style={styles.modalView}>
-//                     <Pressable onPress={handleClose}>
-//                         <Text>Hide Modal</Text>
-//                     </Pressable>
-
-//                     <TextInput
-//                         placeholder='Delivery Date'
-//                         onChangeText={text => setDeliveryDate(text)}
-//                         value={deliveryDate}
-//                     />
-//                     <TextInput
-//                         placeholder='Gift Message'
-//                         onChangeText={text => setGiftMessage(text)}
-//                         value={giftMessage}
-//                     />
-
-//                 </View>
-//             </View>
-
-//         </Modal>
-//     )
-
-// }
-
-// export default observer(FModal);
 
 const styles = StyleSheet.create({
     // centeredView: {
