@@ -7,7 +7,9 @@ const screen = {
     auth: 'Auth',
     modal: 'Modal',
 
-    mobxDemo: 'MobxDemo'
+    mobxDemo: 'MobxDemo',
+    styleDemo: 'StyleDemo',
+    styleDemo1: 'StyleDemo1'
 }
 
 export default screen;

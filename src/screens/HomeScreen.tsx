@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Base from '../style/base';
 import screen from './constant';
 import { navigateTo } from '../navigation/index';
@@ -10,10 +10,19 @@ const HomeScreen = (props: any) => {
         <View style={Base.container}>
             <Text>Home Screen</Text>
 
-            <Button
-                title={screen.mobxDemo}
+            <TouchableOpacity
+                style={Base.NavigateButton}
                 onPress={navigateTo(props.componentId, screen.mobxDemo)}
-            />
+            >
+                <Text style={Base.NavigateButtonText}>{screen.mobxDemo}</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={Base.NavigateButton}
+                onPress={navigateTo(props.componentId, screen.styleDemo1)}
+            >
+                <Text style={Base.NavigateButtonText}>{screen.styleDemo1}</Text>
+            </TouchableOpacity>
 
         </View>
     );
