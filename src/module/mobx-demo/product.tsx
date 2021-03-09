@@ -32,9 +32,9 @@ class Product extends React.Component<IProps> {
 
                 <Text>{`Delivery Date: ${store.deliveryDate}`}</Text>
                 <Text>{`Gift Message: ${store.giftMessage}`}</Text>
-                <TouchableWithoutFeedback onPress={() => store.setShowModal(true)}>
-                    <Text>Open Modal</Text>
-                </TouchableWithoutFeedback>
+                <TouchableOpacity style={Base.NavigateButton} onPress={() => store.setShowModal(true)}>
+                    <Text style={Base.NavigateButtonText}>Open Modal</Text>
+                </TouchableOpacity>
 
                 {/* function component need pass store */}
                 {/* <FModal store={store} /> */}
