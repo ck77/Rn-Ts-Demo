@@ -10,9 +10,7 @@ import AuthScreen from './AuthScreen';
 import MobxDemoScreen from '../module/mobx-demo/mobx-demo-screen';
 import StyleDemoScreen from '../module/style-demo/style-demo-screen';
 import StyleDemo1Screen from '../module/style-demo/demo1/style-demo1-screen';
-
-
-
+import ProductListScreen from '../module/productlist-demo/productlist.screen';
 
 export const registerScreens = () => {
     Navigation.registerComponent(screen.home, () => HomeScreen);
@@ -25,5 +23,7 @@ export const registerScreens = () => {
     Navigation.registerComponent(screen.mobxDemo, () => MobxDemoScreen);
     Navigation.registerComponent(screen.styleDemo, () => StyleDemoScreen);
     Navigation.registerComponent(screen.styleDemo1, () => StyleDemo1Screen);
+    Navigation.registerComponent(screen.productlist, () => ProductListScreen);
+
 
 }

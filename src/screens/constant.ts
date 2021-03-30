@@ -9,7 +9,8 @@ const screen = {
 
     mobxDemo: 'MobxDemo',
     styleDemo: 'StyleDemo',
-    styleDemo1: 'StyleDemo1'
+    styleDemo1: 'StyleDemo1',
+    productlist: 'productlist',
 }
 
 export default screen;

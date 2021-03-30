@@ -19,9 +19,9 @@ const HomeScreen = (props: any) => {
 
             <TouchableOpacity
                 style={Base.NavigateButton}
-                onPress={navigateTo(props.componentId, screen.styleDemo1)}
+                onPress={navigateTo(props.componentId, screen.productlist)}
             >
-                <Text style={Base.NavigateButtonText}>{screen.styleDemo1}</Text>
+                <Text style={Base.NavigateButtonText}>{screen.productlist}</Text>
             </TouchableOpacity>
 
         </View>
