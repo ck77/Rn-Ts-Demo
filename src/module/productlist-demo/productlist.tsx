@@ -1,19 +1,28 @@
 import React, { useEffect } from 'react';
+import { observable, action, computed, autorun, reaction } from "mobx";
 import { Provider, observer, inject, Observer } from 'mobx-react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { ProductListStore } from './productlist.store';
 import Base from '../../style/base';
 import Sponsored from './sponsored';
+import ItemCell from './itemCell';
 
 interface IProps {
     store: ProductListStore;
 }
 
-
 @inject(({ store }: { store: ProductListStore }) => ({ store }))
 @observer
 class ProductList extends React.Component<IProps> {
-    static defaultProps = { store: {} }
+    static defaultProps = { store: {} };
+
+    constructor(props: IProps) {
+        super(props);
+
+        autorun(() => {
+            this.props.store.getList();
+        })
+    }
 
 
     render() {
@@ -26,13 +35,17 @@ class ProductList extends React.Component<IProps> {
                 {/* top sponsored brand */}
                 <Sponsored />
 
-                <Text>{store.count}</Text>
-
-                <TouchableOpacity onPress={store.add}>
-                    <Text>Add</Text>
-                </TouchableOpacity>
-
                 {/* itemList */}
+                <ScrollView>
+                    {
+                        store.itemList.map((item, value) => {
+                            return (
+                                <ItemCell key={item.itemNumber} {...item} />
+                            )
+                        })
+                    }
+
+                </ScrollView>
 
                 {/* bottom sponsored brand */}
 
