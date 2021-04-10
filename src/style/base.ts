@@ -3,9 +3,7 @@ import { StyleSheet } from 'react-native';
 const Base = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // marginTop: 10
+        backgroundColor: '#d5f4e6'
     },
     NavigateButton: {
         backgroundColor: "#2196F3",
