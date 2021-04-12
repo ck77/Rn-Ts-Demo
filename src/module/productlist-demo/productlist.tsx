@@ -7,6 +7,7 @@ import Base from '../../style/base';
 import Sponsored from './sponsored';
 import ItemCell from './itemCell';
 import { ItemDetail } from './model';
+import SponsoreBrand from './sponsoredBrand';
 
 interface IProps {
     store: ProductListStore;
@@ -35,11 +36,22 @@ class ProductList extends React.Component<IProps, IState> {
 
     renderItem = ({ item }: any) => {
 
-        const itemDetail = item as ItemDetail;
+        if (item.type == 'item') {
+            const data = item as ItemDetail;
 
-        return (
-            <ItemCell {...itemDetail} />
-        )
+            return (
+                <ItemCell {...data} />
+            )
+        }
+
+        if (item.type == 'brand') {
+
+            return (
+                <SponsoreBrand {...item} />
+            )
+        }
+
+        return null;
     }
 
     render() {
@@ -57,11 +69,11 @@ class ProductList extends React.Component<IProps, IState> {
                 <FlatList
                     data={store.itemList}
                     renderItem={this.renderItem}
-                    keyExtractor={item => item.itemNumber}
+                    keyExtractor={item => item.index}
                 />
 
                 {/* bottom sponsored brand */}
-                <Sponsored />
+                {/* <Sponsored /> */}
 
             </View>
         )

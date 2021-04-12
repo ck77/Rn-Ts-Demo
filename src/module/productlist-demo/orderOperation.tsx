@@ -141,7 +141,7 @@ class OrderOperation extends React.Component<IProps, IState> {
                 displayInsets={{ top: 24, bottom: 24, left: 10, right: 24 }}
             >
                 <TouchableOpacity
-                    style={[{ paddingLeft: 10 }]}
+                    // style={[{ paddingLeft: 10 }]}
                     onPress={() => this.setState({ showTip: true })}
                 >
                     <Text>More</Text>
@@ -261,9 +261,10 @@ const styles = StyleSheet.create({
     },
     more: {
         justifyContent: 'center',
-        // backgroundColor: 'red',
+        alignItems: 'center',
+        backgroundColor: 'red',
         flex: 1 / 8,
-        marginLeft: -10
+        // marginLeft: 10
     },
     operation: {
         flexDirection: 'row-reverse',

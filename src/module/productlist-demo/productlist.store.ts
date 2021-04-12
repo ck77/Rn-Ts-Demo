@@ -4,7 +4,7 @@ import { ItemDetail } from './model';
 import { ItemListData } from './fakeData';
 
 class ProductListStore {
-    @observable itemList: Array<ItemDetail> = [];
+    @observable itemList: Array<any> = [];
 
     @observable measurements: any = {};
 

@@ -18,7 +18,10 @@ class Sponsored extends React.Component<IProps> {
         const { store } = this.props;
 
         return (
-            <View style={styles.container} onLayout={({ nativeEvent }) => { store.setMeasurements(nativeEvent.layout) }}>
+            <View
+                style={styles.container}
+                onLayout={({ nativeEvent }) => { store.setMeasurements(nativeEvent.layout) }}
+            >
                 <Text style={Base.fontSize28}>Sponsored</Text>
                 <Text>{store.measurements.width}</Text>
             </View>
@@ -30,6 +33,7 @@ export default Sponsored;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'orange'
+        backgroundColor: 'orange',
+        // flexDirection: 'row'
     }
 });
