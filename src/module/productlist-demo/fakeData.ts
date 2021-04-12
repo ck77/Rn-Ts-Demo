@@ -9,7 +9,7 @@ const ItemListData: Array<ItemDetail> = [
         showCancel: true,
         showReplace: true,
         showRequestSellerEmail: true,
-        showReturn: false,
+        showReturn: true,
     },
     {
         itemNumber: '000-002',

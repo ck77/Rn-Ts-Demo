@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Platform, StatusBar, FlatList } from 'react-native';
 
 interface IOButtonProps {
+    isMore?: boolean;
     text: string;
     pressfn: () => void;
 }
@@ -28,21 +29,20 @@ class OButton extends React.Component<IOButtonProps, IOButtonState> {
 
     getWidth() {
         return this.state.measurements.width;
-        // return 1111
     }
 
     render() {
 
-        const { text, pressfn } = this.props;
+        const { isMore, text, pressfn } = this.props;
 
         return (
             <View
-                style={styles.button}
+                style={isMore ? styles.more : styles.button}
                 onLayout={({ nativeEvent }) => {
                     this.setState({ measurements: nativeEvent.layout })
                 }}
             >
-                <TouchableOpacity onPress={() => pressfn}>
+                <TouchableOpacity onPress={() => pressfn()}>
                     <Text>{text}</Text>
                 </TouchableOpacity>
             </View>
@@ -50,7 +50,17 @@ class OButton extends React.Component<IOButtonProps, IOButtonState> {
     }
 }
 
-export default OButton;
+const withStyle = (Component: any) => {
+    return class extends React.Component {
+        render() {
+            return <Component {...this.props} />
+        }
+    }
+}
+
+const WithStyleOButton = withStyle(OButton);
+
+export { OButton, WithStyleOButton }
 
 const styles = StyleSheet.create({
     button: {
@@ -68,5 +78,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 20,
         fontWeight: "bold"
+    },
+    more: {
+
     }
 })

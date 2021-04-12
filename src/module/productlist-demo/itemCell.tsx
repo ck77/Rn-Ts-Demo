@@ -3,7 +3,7 @@ import { Provider, observer, inject } from 'mobx-react';
 import { View, Text, StyleSheet, Platform, TouchableOpacity, UIManager, findNodeHandle } from 'react-native';
 import Base from '../../style/base';
 import { ItemDetail } from './model';
-import OButton from './OButton';
+import { OButton } from './OButton';
 import OrderOperation from './orderOperation';
 
 interface IProps extends ItemDetail { }
