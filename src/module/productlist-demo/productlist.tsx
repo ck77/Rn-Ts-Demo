@@ -62,7 +62,7 @@ class ProductList extends React.Component<IProps, IState> {
             <View style={Base.container}>
 
                 {/* top sponsored brand */}
-                <Sponsored />
+                {/* <Sponsored /> */}
 
                 {/* itemList */}
 

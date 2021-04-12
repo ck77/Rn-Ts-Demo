@@ -12,7 +12,9 @@ interface IState {
     showMore: boolean;
     containerWidth: number;
     operationWidth: number;
-    moreWidth: number;
+    moreLayout: { x: number, y: number, width: number, height: number };
+    orderOperationLayout: { x: number, y: number, width: number, height: number };
+    containerPageY: number;
 
     showCancel: boolean;
     showReplace: boolean;
@@ -29,6 +31,8 @@ interface IState {
 
 class OrderOperation extends React.Component<IProps, IState> {
 
+    private ref_container: any;
+
     private ref_writeReview: any;
     private ref_cancel: any;
     private ref_replace: any;
@@ -43,7 +47,9 @@ class OrderOperation extends React.Component<IProps, IState> {
             showMore: false,
             containerWidth: 0,
             operationWidth: 0,
-            moreWidth: 0,
+            moreLayout: { x: 0, y: 0, width: 0, height: 0 },
+            orderOperationLayout: { x: 0, y: 0, width: 0, height: 0 },
+            containerPageY: 0,
 
             showCancel: this.props.showCancel,
             showReplace: this.props.showReplace,
@@ -121,28 +127,44 @@ class OrderOperation extends React.Component<IProps, IState> {
             });
 
         }, 500);
+
+
+
+    }
+
+    onMorePress = () => {
+
+        const handle = findNodeHandle(this.ref_container);
+        if (handle) {
+            UIManager.measure(handle, (x, y, width, height, pageX, pageY) => {
+                this.setState({ containerPageY: pageY })
+            })
+        }
+
+        this.setState({ showTip: true })
     }
 
     renderMoreBtn = () => {
+
         return (
             <Tooltip
                 isVisible={this.state.showTip}
                 content={this.renderMoreBtnContent()}
                 onClose={() => this.setState({ showTip: false })}
-                placement="top"
+                placement={this.state.containerPageY < 0 ? 'bottom' : 'top'}
                 // below is for the status bar of react navigation bar
                 topAdjustment={Platform.OS === 'android' ? 56 : 0}
                 backgroundColor={'transparent'}
 
                 // tooltip 和 more 的間距
-                childContentSpacing={-4}
+                childContentSpacing={4}
 
                 // { top: 24, bottom: 24, left: 24, right: 24 }
                 displayInsets={{ top: 24, bottom: 24, left: 10, right: 24 }}
             >
                 <TouchableOpacity
                     // style={[{ paddingLeft: 10 }]}
-                    onPress={() => this.setState({ showTip: true })}
+                    onPress={() => this.onMorePress()}
                 >
                     <Text>More</Text>
                 </TouchableOpacity>
@@ -211,35 +233,30 @@ class OrderOperation extends React.Component<IProps, IState> {
         )
     }
 
-    wrapBtnStyle = (Component: any) => {
-        return class extends React.Component {
-            render() {
-                return (
-                    <Component {...this.props} />
-                )
-            }
-        }
-    }
-
     render() {
-        const { showMore, containerWidth, operationWidth, moreWidth } = this.state;
+        const { showMore, containerWidth, operationWidth, orderOperationLayout, moreLayout, containerPageY } = this.state;
+
+
 
         return (
-            <View>
-                <Text>more width: {moreWidth}</Text>
+            <View
+                ref={ref => this.ref_container = ref}
+                onLayout={({ nativeEvent }) => {
+                    this.setState({ orderOperationLayout: nativeEvent.layout })
+                }}
+            >
+                <Text>orderOperationLayout: {orderOperationLayout.x} {orderOperationLayout.y}</Text>
                 <Text>operation container : {containerWidth}</Text>
                 <Text>operation btn width: {operationWidth}</Text>
+                <Text>containerPageY : {containerPageY}</Text>
 
                 <View
                     style={[styles.container, showMore && { justifyContent: 'space-between' }]}
-                // onLayout={({ nativeEvent }) => {
-                //     this.setState({ containerWidth: nativeEvent.layout.width });
-                // }}
                 >
                     <View
                         style={styles.more}
                         onLayout={({ nativeEvent }) => {
-                            this.setState({ moreWidth: nativeEvent.layout.width })
+                            this.setState({ moreLayout: nativeEvent.layout })
                         }}>
                         {this.state.showMore && this.renderMoreBtn()}
                     </View>
@@ -262,7 +279,7 @@ const styles = StyleSheet.create({
     more: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         flex: 1 / 8,
         // marginLeft: 10
     },
